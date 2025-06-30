@@ -8,7 +8,7 @@ public class EmpManagmentApplication {
 
 	public static void main(String[] args) {
 
-		System.out.println("Hello there.. This is the first commit.");
+		System.out.println("Hello there.. This is the first commit. Edited");
 		SpringApplication.run(EmpManagmentApplication.class, args);
 	}
 
