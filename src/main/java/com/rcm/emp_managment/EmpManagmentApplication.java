@@ -7,6 +7,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class EmpManagmentApplication {
 
 	public static void main(String[] args) {
+
+		System.out.println("Hello there.. This is the first commit.");
 		SpringApplication.run(EmpManagmentApplication.class, args);
 	}
 
