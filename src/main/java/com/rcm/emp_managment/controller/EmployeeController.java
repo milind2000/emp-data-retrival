@@ -1,15 +1,15 @@
 package com.rcm.emp_managment.controller;
 
+import com.rcm.emp_managment.dto.EmployeeDetailsDTO;
 import com.rcm.emp_managment.entity.Employee;
 import com.rcm.emp_managment.service.EmployeeService;
+import jakarta.websocket.server.PathParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -23,12 +23,21 @@ public class EmployeeController {
         this.employeeService = employeeService;
     }
 
-    //API 1 : GET ALL EMPLOYESS with QUERY params
     @GetMapping
-    public ResponseEntity<List<Employee>> getAllEmployeesHandler() {
-        return new ResponseEntity<>(employeeService.getAllEmployees(), HttpStatus.FOUND);
+    public ResponseEntity<List<Employee>> getAllEmployeesHandler(
+            @RequestParam(required = false) List<Long> departments,
+            @RequestParam(required = false) List<Long> projects,
+            @RequestParam(required = false) LocalDate reviewDate,
+            @RequestParam(required = false) Integer minScore
+    ) {
+        return new ResponseEntity<>(employeeService.getAllEmployees(departments, projects, reviewDate, minScore), HttpStatus.FOUND);
     }
 
-    //API 2 : GET EMployee by ID
+    @GetMapping("/{employeeId}")
+    public ResponseEntity<EmployeeDetailsDTO> getAllEmployeesHandler(
+            @PathVariable Long employeeId
+    ) {
+        return new ResponseEntity<EmployeeDetailsDTO>(employeeService.getEmployeeDetails(employeeId), HttpStatus.FOUND);
+    }
 
 }

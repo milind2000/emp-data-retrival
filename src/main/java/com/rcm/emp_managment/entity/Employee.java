@@ -37,6 +37,9 @@ public class Employee {
     )
     private List<Project> projects;
 
+    @OneToMany(mappedBy = "employee")
+    private List<PerformanceReview> performanceReviews;
+
     public List<Project> getProjects() {
         return projects;
     }
